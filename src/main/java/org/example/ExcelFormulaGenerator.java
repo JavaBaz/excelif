@@ -1,5 +1,4 @@
 package org.example;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -38,25 +37,30 @@ public class ExcelFormulaGenerator extends JFrame {
 
         String closingParentheses = "";
         for (int i = 1; i <= numberOfIf; i++) {
-            String logicalTest = JOptionPane.showInputDialog("Enter logical test for IF statement " + i) + ", ";
-            String valueIfTrue = "\"" + JOptionPane.showInputDialog("Enter value if true for IF statement " + i) + "\", ";
+            String logicalTest = JOptionPane.showInputDialog("Enter logical test for IF statement " + i);
+            if (logicalTest == null) {
+                // If the user clicks "Cancel," exit the method
+                return "";
+            }
+
+            String valueIfTrue = JOptionPane.showInputDialog("Enter value if true for IF statement " + i);
+            if (valueIfTrue == null) {
+                // If the user clicks "Cancel," exit the method
+                return "";
+            }
+
             formulaBuilder.append("IF(");
             formulaBuilder.append(logicalTest);
-
-
+            formulaBuilder.append(", ");
             formulaBuilder.append(valueIfTrue);
-
             closingParentheses += ")";
-
-
         }
+
         formulaBuilder.append("\"\"");
         formulaBuilder.append(closingParentheses);
         formulaBuilder.append(")");
-
-
-        int endingIndexToDelete = formulaBuilder.length() - numberOfIf ;
-        int startingIndexToDelete = endingIndexToDelete - numberOfIf ;
+        int endingIndexToDelete = formulaBuilder.length() - numberOfIf;
+        int startingIndexToDelete = endingIndexToDelete - numberOfIf;
         formulaBuilder.delete(startingIndexToDelete, endingIndexToDelete);
         formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
         formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
