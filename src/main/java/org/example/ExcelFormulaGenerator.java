@@ -2,8 +2,6 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ExcelFormulaGenerator extends JFrame {
 
@@ -28,13 +26,10 @@ public class ExcelFormulaGenerator extends JFrame {
         add(generateButton);
         add(formulaTextArea);
 
-        generateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int numberOfIf = Integer.parseInt(numberOfIfText.getText());
-                String formula = generateFormula(numberOfIf);
-                formulaTextArea.setText(formula);
-            }
+        generateButton.addActionListener(e -> {
+            int numberOfIf = Integer.parseInt(numberOfIfText.getText());
+            String formula = generateFormula(numberOfIf);
+            formulaTextArea.setText(formula);
         });
     }
 
