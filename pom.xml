@@ -23,7 +23,7 @@
                         </goals>
                         <configuration>
                             <!-- mandatory -->
-                            <mainClass>com.vardast.main</mainClass>
+                            <mainClass>org.example.ExcelFormulaGenerator</mainClass>
                             <!-- optional -->
                             <bundleJre>true</bundleJre>
                             <generateInstaller>true</generateInstaller>
