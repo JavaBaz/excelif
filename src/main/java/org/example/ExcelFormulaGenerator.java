@@ -56,13 +56,18 @@ public class ExcelFormulaGenerator extends JFrame {
         formulaBuilder.append("\"\"");
         formulaBuilder.append(closingParentheses);
         formulaBuilder.append(")");
+
+        deleteUnnecessaryParts(formulaBuilder, numberOfIf);
+
+        return formulaBuilder.toString();
+    }
+
+    private void deleteUnnecessaryParts(StringBuilder formulaBuilder, int numberOfIf) {
         int endingIndexToDelete = formulaBuilder.length() - numberOfIf;
         int startingIndexToDelete = endingIndexToDelete - numberOfIf;
         formulaBuilder.delete(startingIndexToDelete, endingIndexToDelete);
         formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
         formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
-
-        return formulaBuilder.toString();
     }
 
     public static void main(String[] args) {
