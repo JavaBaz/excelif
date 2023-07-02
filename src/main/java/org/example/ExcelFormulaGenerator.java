@@ -4,10 +4,8 @@ import java.awt.*;
 
 public class ExcelFormulaGenerator extends JFrame {
 
-    private JLabel ifLabel;
-    private JTextField numberOfIfText;
-    private JButton generateButton;
-    private JTextArea formulaTextArea;
+    private final JTextField numberOfIfText;
+    private final JTextArea formulaTextArea;
 
     public ExcelFormulaGenerator() {
         setTitle("Excel Formula Generator");
@@ -15,9 +13,9 @@ public class ExcelFormulaGenerator extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        ifLabel = new JLabel("Number of IF statements:");
+        JLabel ifLabel = new JLabel("Number of IF statements:");
         numberOfIfText = new JTextField(10);
-        generateButton = new JButton("Generate");
+        JButton generateButton = new JButton("Generate");
         formulaTextArea = new JTextArea(10, 30);
 
         add(ifLabel);
