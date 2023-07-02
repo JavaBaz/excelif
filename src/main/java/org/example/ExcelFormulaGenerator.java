@@ -33,7 +33,7 @@ public class ExcelFormulaGenerator extends JFrame {
     private String generateFormula(int numberOfIf) {
         StringBuilder formulaBuilder = new StringBuilder("=");
 
-        String closingParentheses = "";
+        StringBuilder closingParentheses = new StringBuilder();
         for (int i = 1; i <= numberOfIf; i++) {
             String logicalTest = JOptionPane.showInputDialog("Enter logical test for IF statement " + i);
             if (logicalTest == null) {
@@ -51,7 +51,7 @@ public class ExcelFormulaGenerator extends JFrame {
             formulaBuilder.append(logicalTest);
             formulaBuilder.append(", ");
             formulaBuilder.append(valueIfTrue);
-            closingParentheses += ")";
+            closingParentheses.append(")");
         }
 
         formulaBuilder.append("\"\"");
