@@ -39,25 +39,24 @@ public class ExcelFormulaGenerator extends JFrame {
                 // If the user clicks "Cancel," exit the method
                 return "";
             }
-
             String valueIfTrue = JOptionPane.showInputDialog("Enter value if true for IF statement " + i);
             if (valueIfTrue == null) {
                 // If the user clicks "Cancel," exit the method
                 return "";
             }
-
-            formulaBuilder.append("IF(");
-            formulaBuilder.append(logicalTest);
-            formulaBuilder.append(", ");
-            formulaBuilder.append(valueIfTrue);
+            appendNessaryParts(formulaBuilder, logicalTest, valueIfTrue);
             closingParentheses.append(")");
         }
-
-
         appendEndNessaryParts(formulaBuilder, closingParentheses);
         deleteUnnecessaryParts(formulaBuilder, numberOfIf);
-
         return formulaBuilder.toString();
+    }
+
+    private void appendNessaryParts(StringBuilder formulaBuilder, String logicalTest, String valueIfTrue) {
+        formulaBuilder.append("IF(");
+        formulaBuilder.append(logicalTest);
+        formulaBuilder.append(", ");
+        formulaBuilder.append(valueIfTrue);
     }
 
     private void appendEndNessaryParts(StringBuilder formulaBuilder, StringBuilder closingParentheses) {
