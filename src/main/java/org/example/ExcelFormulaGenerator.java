@@ -13,12 +13,11 @@ public class ExcelFormulaGenerator extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        JLabel ifLabel = new JLabel("Number of IF statements:");
         numberOfIfText = new JTextField(10);
         JButton generateButton = new JButton("Generate");
         formulaTextArea = new JTextArea(10, 30);
 
-        add(ifLabel);
+        add(new JLabel("Number of IF statements:"));
         add(numberOfIfText);
         add(generateButton);
         add(formulaTextArea);
