@@ -1,13 +1,12 @@
 package org.example;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ExcelFormulaGenerator extends JFrame {
 
-    private JLabel ifLabel;
-    private JTextField numberOfIfText;
-    private JButton generateButton;
-    private JTextArea formulaTextArea;
+    private final JTextField numberOfIfText;
+    private final JTextArea formulaTextArea;
 
     public ExcelFormulaGenerator() {
         setTitle("Excel Formula Generator");
@@ -15,12 +14,11 @@ public class ExcelFormulaGenerator extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        ifLabel = new JLabel("Number of IF statements:");
         numberOfIfText = new JTextField(10);
-        generateButton = new JButton("Generate");
+        JButton generateButton = new JButton("Generate");
         formulaTextArea = new JTextArea(10, 30);
 
-        add(ifLabel);
+        add(new JLabel("Number of IF statements:"));
         add(numberOfIfText);
         add(generateButton);
         add(formulaTextArea);
@@ -35,45 +33,46 @@ public class ExcelFormulaGenerator extends JFrame {
     private String generateFormula(int numberOfIf) {
         StringBuilder formulaBuilder = new StringBuilder("=");
 
-        String closingParentheses = "";
+        StringBuilder closingParentheses = new StringBuilder();
         for (int i = 1; i <= numberOfIf; i++) {
             String logicalTest = JOptionPane.showInputDialog("Enter logical test for IF statement " + i);
-            if (logicalTest == null) {
-                // If the user clicks "Cancel," exit the method
+            // If the user clicks "Cancel," exit the method
+            if (logicalTest == null)
                 return "";
-            }
-
             String valueIfTrue = JOptionPane.showInputDialog("Enter value if true for IF statement " + i);
-            if (valueIfTrue == null) {
-                // If the user clicks "Cancel," exit the method
+            // If the user clicks "Cancel," exit the method
+            if (valueIfTrue == null)
                 return "";
-            }
-
-            formulaBuilder.append("IF(");
-            formulaBuilder.append(logicalTest);
-            formulaBuilder.append(", ");
-            formulaBuilder.append(valueIfTrue);
-            closingParentheses += ")";
+            appendNessaryParts(formulaBuilder, logicalTest, valueIfTrue);
+            closingParentheses.append(")");
         }
+        appendEndNessaryParts(formulaBuilder, closingParentheses);
+        deleteUnnecessaryParts(formulaBuilder, numberOfIf);
+        return formulaBuilder.toString();
+    }
 
+    private void appendNessaryParts(StringBuilder formulaBuilder, String logicalTest, String valueIfTrue) {
+        formulaBuilder.append("IF(");
+        formulaBuilder.append(logicalTest);
+        formulaBuilder.append(", ");
+        formulaBuilder.append(valueIfTrue);
+    }
+
+    private void appendEndNessaryParts(StringBuilder formulaBuilder, StringBuilder closingParentheses) {
         formulaBuilder.append("\"\"");
         formulaBuilder.append(closingParentheses);
         formulaBuilder.append(")");
+    }
+
+    private void deleteUnnecessaryParts(StringBuilder formulaBuilder, int numberOfIf) {
         int endingIndexToDelete = formulaBuilder.length() - numberOfIf;
         int startingIndexToDelete = endingIndexToDelete - numberOfIf;
         formulaBuilder.delete(startingIndexToDelete, endingIndexToDelete);
         formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
         formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
-
-        return formulaBuilder.toString();
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ExcelFormulaGenerator().setVisible(true);
-            }
-        });
+        SwingUtilities.invokeLater(() -> new ExcelFormulaGenerator().setVisible(true));
     }
 }
