@@ -43,22 +43,22 @@ public class ExcelFormulaGenerator extends JFrame {
             // If the user clicks "Cancel," exit the method
             if (valueIfTrue == null)
                 return "";
-            appendNessaryParts(formulaBuilder, logicalTest, valueIfTrue);
+            appendNecessaryParts(formulaBuilder, logicalTest, valueIfTrue);
             closingParentheses.append(")");
         }
-        appendEndNessaryParts(formulaBuilder, closingParentheses);
+        appendEndNecessaryParts(formulaBuilder, closingParentheses);
         deleteUnnecessaryParts(formulaBuilder, numberOfIf);
         return formulaBuilder.toString();
     }
 
-    private void appendNessaryParts(StringBuilder formulaBuilder, String logicalTest, String valueIfTrue) {
+    private void appendNecessaryParts(StringBuilder formulaBuilder, String logicalTest, String valueIfTrue) {
         formulaBuilder.append("IF(");
         formulaBuilder.append(logicalTest);
         formulaBuilder.append(", ");
         formulaBuilder.append(valueIfTrue);
     }
 
-    private void appendEndNessaryParts(StringBuilder formulaBuilder, StringBuilder closingParentheses) {
+    private void appendEndNecessaryParts(StringBuilder formulaBuilder, StringBuilder closingParentheses) {
         formulaBuilder.append("\"\"");
         formulaBuilder.append(closingParentheses);
         formulaBuilder.append(")");
