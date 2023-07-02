@@ -39,10 +39,12 @@ public class ExcelFormulaGenerator extends JFrame {
             // If the user clicks "Cancel," exit the method
             if (logicalTest == null)
                 return "";
+
             String valueIfTrue = JOptionPane.showInputDialog("Enter value if true for IF statement " + i);
             // If the user clicks "Cancel," exit the method
             if (valueIfTrue == null)
                 return "";
+
             appendNecessaryParts(formulaBuilder, logicalTest, valueIfTrue);
             closingParentheses.append(")");
         }
@@ -55,21 +57,21 @@ public class ExcelFormulaGenerator extends JFrame {
         formulaBuilder.append("IF(");
         formulaBuilder.append(logicalTest);
         formulaBuilder.append(", ");
+        formulaBuilder.append("\"");
         formulaBuilder.append(valueIfTrue);
+        formulaBuilder.append("\", ");
     }
 
     private void appendEndNecessaryParts(StringBuilder formulaBuilder, StringBuilder closingParentheses) {
-        formulaBuilder.append("\"\"");
         formulaBuilder.append(closingParentheses);
-        formulaBuilder.append(")");
     }
 
-    private void deleteUnnecessaryParts(StringBuilder formulaBuilder, int numberOfIf) {
-        int endingIndexToDelete = formulaBuilder.length() - numberOfIf;
-        int startingIndexToDelete = endingIndexToDelete - numberOfIf;
-        formulaBuilder.delete(startingIndexToDelete, endingIndexToDelete);
-        formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
-        formulaBuilder.deleteCharAt(formulaBuilder.length() - 4);
+
+    private void deleteUnnecessaryParts(StringBuilder sb, int numberOfIf){
+        int lastIndex = sb.length() - 2;
+        int positionLastUnwantedCharacter = lastIndex - numberOfIf;
+        sb.deleteCharAt(positionLastUnwantedCharacter);
+        sb.deleteCharAt(positionLastUnwantedCharacter);
     }
 
     public static void main(String[] args) {
