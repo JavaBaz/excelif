@@ -1,4 +1,5 @@
 package org.example;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,15 +36,13 @@ public class ExcelFormulaGenerator extends JFrame {
         StringBuilder closingParentheses = new StringBuilder();
         for (int i = 1; i <= numberOfIf; i++) {
             String logicalTest = JOptionPane.showInputDialog("Enter logical test for IF statement " + i);
-            if (logicalTest == null) {
-                // If the user clicks "Cancel," exit the method
+            // If the user clicks "Cancel," exit the method
+            if (logicalTest == null)
                 return "";
-            }
             String valueIfTrue = JOptionPane.showInputDialog("Enter value if true for IF statement " + i);
-            if (valueIfTrue == null) {
-                // If the user clicks "Cancel," exit the method
+            // If the user clicks "Cancel," exit the method
+            if (valueIfTrue == null)
                 return "";
-            }
             appendNessaryParts(formulaBuilder, logicalTest, valueIfTrue);
             closingParentheses.append(")");
         }
