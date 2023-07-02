@@ -53,13 +53,17 @@ public class ExcelFormulaGenerator extends JFrame {
             closingParentheses.append(")");
         }
 
-        formulaBuilder.append("\"\"");
-        formulaBuilder.append(closingParentheses);
-        formulaBuilder.append(")");
 
+        appendNessaryParts(formulaBuilder, closingParentheses);
         deleteUnnecessaryParts(formulaBuilder, numberOfIf);
 
         return formulaBuilder.toString();
+    }
+
+    private void appendNessaryParts(StringBuilder formulaBuilder, StringBuilder closingParentheses) {
+        formulaBuilder.append("\"\"");
+        formulaBuilder.append(closingParentheses);
+        formulaBuilder.append(")");
     }
 
     private void deleteUnnecessaryParts(StringBuilder formulaBuilder, int numberOfIf) {
